@@ -58,6 +58,12 @@ I enjoy turning ideas into working products — from marketplace platforms and c
 
 ## ⭐ Featured Projects
 
+### 🏫 EduManage School Management SaaS
+A full-stack SaaS platform for schools and training institutions with students, teachers, attendance, results, fees, invoices, parent communication planning and admin analytics.
+
+**Stack:** TypeScript, Next.js, Prisma, PostgreSQL, Tailwind CSS  
+🔗 [Repository](https://github.com/basgenix4u/school-management-saas)
+
 ### 🛒 FUW Marketplace
 A student-first marketplace for Federal University Wukari where users can buy, sell, post services, request items, find accommodation, chat through WhatsApp and receive notifications.
 
