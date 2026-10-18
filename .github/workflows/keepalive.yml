@@ -1,0 +1,32 @@
+# Every Render service on the free plan sleeps after ~15 minutes without a
+# request. This workflow pings each one every five minutes so the portfolio's
+# backends answer instantly for a real visitor. It lives in the public profile
+# repo because scheduled workflows on public repositories are free.
+name: Keep the Render services awake
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping every service
+        run: |
+          for u in \
+            "https://nelove.onrender.com/api/health" \
+            "https://relay-70ml.onrender.com/api/health" \
+            "https://alims-app.onrender.com/api/health" \
+            "https://alimswrite-go-api-cttj.onrender.com/health" \
+            "https://alimswrite-ai-engine-oog6.onrender.com/health" \
+            "https://resolve-api-eadv.onrender.com/api/ready" \
+            "https://vic-alert-server.onrender.com/health" \
+            "https://kilnguard-prototype.onrender.com/" \
+            "https://alims-whatsapp-engine-7cxl.onrender.com/" \
+            "https://bridgedrop-relay.onrender.com/" \
+            "https://relay-delta-ecru.vercel.app/"
+          do
+            curl -s -m 30 -o /dev/null -w "%{http_code}  $u\n" "$u" || true
+          done
